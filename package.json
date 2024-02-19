@@ -1,0 +1,40 @@
+{
+  "name": "kind-dentist",
+  "version": "0.0.0",
+  "description": "This is a joke application where a kind dentist will listen to your oral troubles.",
+  "keywords": [
+    "dentist",
+    "joke"
+  ],
+  "main": "app.js",
+  "bin": {
+    "kind-dentist": "./app.js"
+  },
+  "scripts": {
+    "fix": "prettier --write . && eslint --fix .",
+    "lint": "prettier --check . && eslint ."
+  },
+  "type": "module",
+  "author": "motohiro-mm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motohiro-mm/kind-dentist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/motohiro-mm/kind-dentist/issues"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "minimist": "^1.2.8"
+  },
+  "homepage": "https://github.com/motohiro-mm/kind-dentist#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "license": "MIT"
+}
