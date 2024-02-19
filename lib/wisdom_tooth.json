@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "他の歯のようにまっすぐ生えている",
+    "value": "explanations.json",
+    "title": "full8",
+    "dentistReply": "ふむ、そうか。\n"
+  },
+  {
+    "id": 2,
+    "name": "一部だけ見えている",
+    "value": "explanations.json",
+    "title": "partial8",
+    "dentistReply": "一部見えとるんじゃな。\n"
+  },
+  {
+    "id": 3,
+    "name": "まったく見えていない",
+    "value": "explanations.json",
+    "title": "impacted8",
+    "dentistReply": "なるほどのぅ。\n"
+  },
+  {
+    "id": 4,
+    "name": "どのように生えているのか知らない",
+    "value": "explanations.json",
+    "title": "unknown8",
+    "dentistReply": "ふむふむ。\n"
+  }
+]
