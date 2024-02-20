@@ -4,19 +4,27 @@ import enquirer from "enquirer";
 const { Select } = enquirer;
 
 export class Dentist {
-  async examine(speed) {
+  constructor(dirPath) {
+    this.dirPath = dirPath,
+    this.calm = this.#talkSpeed.calm
+    this.explanation = this.#talkSpeed.explanation
+    this.jokeBefore = this.#talkSpeed.jokeBefore
+    this.joke = this.#talkSpeed.joke
+  }
+
+  async examine() {
     const selectedTroubles = [{ value: "general_oral_troubles.json" }];
     for (let i = 0; i < 3; i++) {
       if (i === 0) {
         this.#lookCalm();
         await Display.printComments(
           this.#firstComment,
-          speed,
+          this.calm,
           Display.formatChars,
         );
       }
       const choices = await JSON.parse(
-        await readFile(`./lib/${selectedTroubles[i].value}`),
+        await readFile(`${this.dirPath}/lib/${selectedTroubles[i].value}`),
       );
       const selectedTrouble = await this.#askQuestion(
         this.#questionTexts[i],
@@ -25,7 +33,7 @@ export class Dentist {
       selectedTroubles.push(selectedTrouble);
       this.#lookCalm();
       const dentistReply = selectedTroubles[i + 1].dentistReply;
-      await Display.printComments(dentistReply, speed, Display.formatChars);
+      await Display.printComments(dentistReply, this.calm, Display.formatChars);
       if (selectedTrouble.title) {
         break;
       }
@@ -33,36 +41,36 @@ export class Dentist {
     return selectedTroubles.pop();
   }
 
-  async explain(mainTrouble, speed) {
+  async explain(mainTrouble) {
     const explanation = await JSON.parse(
-      await readFile(`./lib/${mainTrouble.value}`),
+      await readFile(`${this.dirPath}/lib/${mainTrouble.value}`),
     ).find((element) => element.title === mainTrouble.title);
-    await Display.printComments(explanation.detail, speed, Display.formatLines);
+    await Display.printComments(explanation.detail, this.explanation, Display.formatLines);
     return explanation.pattern;
   }
 
   async talkAfterExplain(pattern) {
     const lastChoices = await JSON.parse(
-      await readFile("./lib/dentist_jokes.json"),
+      await readFile(`${this.dirPath}/lib/dentist_jokes.json`),
     ).find((element) => element.pattern === pattern).jokes;
     return await this.#askQuestion(this.#questionTexts[3], lastChoices);
   }
 
-  async tellJoke(lastReply, jokeBeforeSpeed, jokeSpeed, goodWaitingTime) {
+  async tellJoke(lastReply, times) {
     this.#makeAngryButKidding();
     await Display.printComments(
       "むむむっ！",
-      jokeBeforeSpeed,
+      this.jokeBefore,
       Display.formatChars,
     );
-    await Display.printComments(lastReply.joke, jokeSpeed, Display.formatChars);
-    await Display.waitingTime(goodWaitingTime);
+    await Display.printComments(lastReply.joke, this.joke, Display.formatChars);
+    await Display.waitingTime(times);
   }
 
-  async sayClosing(speed, goodWaitingTime) {
+  async sayClosing(times) {
     this.#lookCalm();
-    await Display.printComments(this.#lastComment, speed, Display.formatChars);
-    await Display.waitingTime(goodWaitingTime);
+    await Display.printComments(this.#lastComment, this.calm, Display.formatChars);
+    await Display.waitingTime(times);
   }
 
   async #askQuestion(messages, patientWords) {
@@ -102,4 +110,11 @@ export class Dentist {
 
   #lastComment =
     "ふぅ。\n\nまぁ、ワシの言うことなど聞きながすんじゃ。\nおぬしの好きにするがよいぞ。\nお大事にのぅ。\n\n";
-}
+
+  #talkSpeed = {
+    calm: 110,
+    explanation: 850,
+    jokeBefore: 250,
+    joke: 20
+    }
+  }

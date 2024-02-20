@@ -3,14 +3,14 @@
 import { Display } from "./display.js";
 import { Dentist } from "./dentist.js";
 import minimist from "minimist";
-
-const oneSecond = 1000;
-const calmSpeed = 120;
-const explanationSpeed = 850;
-const jokeBeforeSpeed = 250;
-const jokeSpeed = 20;
+import { fileURLToPath } from "url";
+import path from "path";
 
 class App {
+  constructor(dirPath){
+    this.dirPath = dirPath
+  }
+
   async run() {
     const argv = minimist(process.argv.slice(2));
     const numberOptions = Object.keys(argv).length;
@@ -32,24 +32,29 @@ class App {
       "\n--------------------------------------------------------------------------------",
     );
     console.log(
-      "\n表示された線が1行で見えるように画面の幅を調整していただきますと、\nアプリ中の文字が正しく表示されます。",
+      "\n表示された線が1行で見えるように画面の幅を調整していただきますと、\nアプリ中の文字が見やすく表示されます。",
     );
   }
 
   async main() {
     Display.exitIfReceiveCancel();
 
-    await Display.frame(Display.instruction, oneSecond);
-    const dentist = new Dentist();
-    const mainTrouble = await dentist.examine(calmSpeed);
-    const patientPattern = await dentist.explain(mainTrouble, explanationSpeed);
+    await Display.frame(Display.instruction, goodWaitingTime);
+    const dentist = new Dentist(this.dirPath);
+    const mainTrouble = await dentist.examine();
+    const patientPattern = await dentist.explain(mainTrouble);
     const lastReply = await dentist.talkAfterExplain(patientPattern);
-    await dentist.tellJoke(lastReply, jokeBeforeSpeed, jokeSpeed, oneSecond);
-    await dentist.sayClosing(calmSpeed, oneSecond);
-    await Display.frame(Display.cautionNote, oneSecond * 2.2);
+    await dentist.tellJoke(lastReply, goodWaitingTime);
+    await dentist.sayClosing(goodWaitingTime);
+    await Display.frame(Display.cautionNote, goodWaitingTime * 2.2);
     console.log(Display.goDentalClinic);
   }
 }
 
-const app = new App();
+const goodWaitingTime = 1000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = new App(__dirname);
 app.run();
