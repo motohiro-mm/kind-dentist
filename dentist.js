@@ -5,11 +5,10 @@ const { Select } = enquirer;
 
 export class Dentist {
   constructor(dirPath) {
-    this.dirPath = dirPath,
-    this.calm = this.#talkSpeed.calm
-    this.explanation = this.#talkSpeed.explanation
-    this.jokeBefore = this.#talkSpeed.jokeBefore
-    this.joke = this.#talkSpeed.joke
+    (this.dirPath = dirPath), (this.calm = this.#talkSpeed.calm);
+    this.explanation = this.#talkSpeed.explanation;
+    this.jokeBefore = this.#talkSpeed.jokeBefore;
+    this.joke = this.#talkSpeed.joke;
   }
 
   async examine() {
@@ -45,7 +44,11 @@ export class Dentist {
     const explanation = await JSON.parse(
       await readFile(`${this.dirPath}/lib/${mainTrouble.value}`),
     ).find((element) => element.title === mainTrouble.title);
-    await Display.printComments(explanation.detail, this.explanation, Display.formatLines);
+    await Display.printComments(
+      explanation.detail,
+      this.explanation,
+      Display.formatLines,
+    );
     return explanation.pattern;
   }
 
@@ -69,7 +72,11 @@ export class Dentist {
 
   async sayClosing(times) {
     this.#lookCalm();
-    await Display.printComments(this.#lastComment, this.calm, Display.formatChars);
+    await Display.printComments(
+      this.#lastComment,
+      this.calm,
+      Display.formatChars,
+    );
     await Display.waitingTime(times);
   }
 
@@ -115,6 +122,6 @@ export class Dentist {
     calm: 110,
     explanation: 850,
     jokeBefore: 250,
-    joke: 20
-    }
-  }
+    joke: 20,
+  };
+}

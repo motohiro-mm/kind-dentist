@@ -7,8 +7,8 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 class App {
-  constructor(dirPath){
-    this.dirPath = dirPath
+  constructor(dirPath) {
+    this.dirPath = dirPath;
   }
 
   async run() {
