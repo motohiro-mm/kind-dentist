@@ -1,15 +1,20 @@
 export class Display {
-  static async printComments(comments, speed, format) {
-    const printComments = comments.split(format.partition);
-    printComments.forEach((comment, index) => {
-      setTimeout(() => {
-        format.print(comment);
-      }, index * speed);
-    });
-    await this.waitingTime(printComments.length * speed);
+  constructor(speed, formatType = Display.#formatChars) {
+    this.speed = speed;
+    this.formatType = formatType;
   }
 
-  static formatChars = {
+  async printComments(comments) {
+    const printComments = comments.split(this.formatType.partition);
+    printComments.forEach((comment, index) => {
+      setTimeout(() => {
+        this.formatType.print(comment);
+      }, index * this.speed);
+    });
+    await this.waitingTime(printComments.length * this.speed);
+  }
+
+  static #formatChars = {
     partition: "",
     print: (char) => {
       process.stdout.write(char);
@@ -23,7 +28,7 @@ export class Display {
     },
   };
 
-  static waitingTime(time) {
+  waitingTime(time) {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve();
@@ -32,18 +37,19 @@ export class Display {
   }
 
   static cancelProcess() {
+    const cancelDisplay = new Display();
     console.log("\n今回はここまでにしましょう。");
-    Display.frame(Display.cautionNote);
+    cancelDisplay.frame(Display.cautionNote);
     process.exit(1);
   }
 
-  static async frame(content, waitingTime) {
+  async frame(content) {
     console.log(`
 --------------------------------------------------------------------------------
 ${content}
 --------------------------------------------------------------------------------
 `);
-    await Display.waitingTime(waitingTime);
+    await this.waitingTime(this.speed);
   }
 
   static instruction = `

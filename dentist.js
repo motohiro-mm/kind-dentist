@@ -5,22 +5,20 @@ const { Select } = enquirer;
 
 export class Dentist {
   constructor(dirPath) {
-    (this.dirPath = dirPath), (this.calm = this.#talkSpeed.calm);
+    this.dirPath = dirPath;
+    this.calm = this.#talkSpeed.calm;
     this.explanation = this.#talkSpeed.explanation;
     this.jokeBefore = this.#talkSpeed.jokeBefore;
     this.joke = this.#talkSpeed.joke;
   }
 
   async examine() {
+    const calmDisplay = new Display(this.calm);
     const selectedTroubles = [{ value: "general_oral_troubles.json" }];
     for (let i = 0; i < 3; i++) {
       if (i === 0) {
         this.#lookCalm();
-        await Display.printComments(
-          this.#firstComment,
-          this.calm,
-          Display.formatChars,
-        );
+        await calmDisplay.printComments(this.#firstComment);
       }
       const choices = await JSON.parse(
         await readFile(`${this.dirPath}/lib/${selectedTroubles[i].value}`),
@@ -32,7 +30,7 @@ export class Dentist {
       selectedTroubles.push(selectedTrouble);
       this.#lookCalm();
       const dentistReply = selectedTroubles[i + 1].dentistReply;
-      await Display.printComments(dentistReply, this.calm, Display.formatChars);
+      await calmDisplay.printComments(dentistReply);
       if (selectedTrouble.title) {
         break;
       }
@@ -44,11 +42,11 @@ export class Dentist {
     const explanation = await JSON.parse(
       await readFile(`${this.dirPath}/lib/${mainTrouble.value}`),
     ).find((element) => element.title === mainTrouble.title);
-    await Display.printComments(
-      explanation.detail,
+    const explanatoryDisplay = new Display(
       this.explanation,
       Display.formatLines,
     );
+    await explanatoryDisplay.printComments(explanation.detail);
     return explanation.pattern;
   }
 
@@ -61,23 +59,18 @@ export class Dentist {
 
   async tellJoke(lastReply, times) {
     this.#makeAngryButKidding();
-    await Display.printComments(
-      "むむむっ！",
-      this.jokeBefore,
-      Display.formatChars,
-    );
-    await Display.printComments(lastReply.joke, this.joke, Display.formatChars);
-    await Display.waitingTime(times);
+    const jokeBeforeDisplay = new Display(this.jokeBefore);
+    await jokeBeforeDisplay.printComments("むむむっ！");
+    const jokeDisplay = new Display(this.joke);
+    await jokeDisplay.printComments(lastReply.joke);
+    await jokeDisplay.waitingTime(times);
   }
 
   async sayClosing(times) {
     this.#lookCalm();
-    await Display.printComments(
-      this.#lastComment,
-      this.calm,
-      Display.formatChars,
-    );
-    await Display.waitingTime(times);
+    const closingDisplay = new Display(this.calm);
+    await closingDisplay.printComments(this.#lastComment);
+    await closingDisplay.waitingTime(times);
   }
 
   async #askQuestion(messages, patientWords) {

@@ -39,14 +39,16 @@ class App {
   async main() {
     this.#exitIfReceiveCancel();
 
-    await Display.frame(Display.instruction, goodWaitingTime);
+    const instructionDisplay = new Display(goodWaitingTime);
+    await instructionDisplay.frame(Display.instruction);
     const dentist = new Dentist(this.dirPath);
     const mainTrouble = await dentist.examine();
     const patientPattern = await dentist.explain(mainTrouble);
     const lastReply = await dentist.talkAfterExplain(patientPattern);
     await dentist.tellJoke(lastReply, goodWaitingTime);
     await dentist.sayClosing(goodWaitingTime);
-    await Display.frame(Display.cautionNote, goodWaitingTime * 2.2);
+    const cautionDisplay = new Display(goodWaitingTime * 2.2);
+    await cautionDisplay.frame(Display.cautionNote);
     console.log(Display.goDentalClinic);
   }
 
