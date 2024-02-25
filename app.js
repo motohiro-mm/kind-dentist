@@ -37,7 +37,7 @@ class App {
   }
 
   async main() {
-    Display.exitIfReceiveCancel();
+    this.#exitIfReceiveCancel();
 
     await Display.frame(Display.instruction, goodWaitingTime);
     const dentist = new Dentist(this.dirPath);
@@ -48,6 +48,12 @@ class App {
     await dentist.sayClosing(goodWaitingTime);
     await Display.frame(Display.cautionNote, goodWaitingTime * 2.2);
     console.log(Display.goDentalClinic);
+  }
+
+  #exitIfReceiveCancel() {
+    process.on("SIGINT", () => {
+      Display.cancelProcess();
+    });
   }
 }
 

@@ -31,12 +31,6 @@ export class Display {
     });
   }
 
-  static exitIfReceiveCancel() {
-    process.on("SIGINT", () => {
-      Display.cancelProcess();
-    });
-  }
-
   static cancelProcess() {
     console.log("\n今回はここまでにしましょう。");
     Display.frame(Display.cautionNote);
