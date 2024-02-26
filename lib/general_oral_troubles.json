@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "歯に関する悩み",
+    "value": "tooth_troubles.json",
+    "dentistReply": "歯がどうしたのじゃ。\n\n"
+  },
+  {
+    "id": 2,
+    "name": "歯茎に関する悩み",
+    "value": "gums_troubles.json",
+    "dentistReply": "歯茎がどうしたのじゃ。\n\n"
+  },
+  {
+    "id": 3,
+    "name": "その他の口の悩み",
+    "value": "other_oral_troubles.json",
+    "dentistReply": "どんなお悩みかのぅ。\n\n"
+  },
+  {
+    "id": 4,
+    "name": "歯医者が苦手で行きたくない",
+    "value": "explanations.json",
+    "title": "not_like_dentist",
+    "dentistReply": "ふむ。そうかそうか。\n"
+  }
+]

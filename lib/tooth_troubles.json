@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "name": "歯が痛い",
+    "value": "toothache.json",
+    "dentistReply": "どのように痛むのかのぅ。\n\n"
+  },
+  {
+    "id": 2,
+    "name": "親知らずが気になる",
+    "value": "wisdom_tooth.json",
+    "dentistReply": "親知らずがどのようにはえているか分かるかのぅ。\n\n"
+  },
+  {
+    "id": 3,
+    "name": "歯が欠けた・折れた",
+    "value": "explanations.json",
+    "title": "broken_tooth",
+    "dentistReply": "おぉそうか。それは驚いたじゃろぅ。\n"
+  },
+  {
+    "id": 4,
+    "name": "歯がグラグラする",
+    "value": "explanations.json",
+    "title": "mobilization",
+    "dentistReply": "歯が揺れておるのじゃな。\n"
+  }
+]

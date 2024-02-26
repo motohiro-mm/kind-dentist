@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "口を開け閉めすると顎が痛い",
+    "value": "explanations.json",
+    "title": "TMD",
+    "dentistReply": "おぉそれはつらいのぅ。\n"
+  },
+  {
+    "id": 2,
+    "name": "歯並びが気になる",
+    "value": "explanations.json",
+    "title": "row_of_teeth",
+    "dentistReply": "歯並びが気になるのじゃな。\n"
+  },
+  {
+    "id": 3,
+    "name": "口内炎が治らない",
+    "value": "explanations.json",
+    "title": "stomatitis",
+    "dentistReply": "口内炎はつらいのぅ。\n"
+  },
+  {
+    "id": 4,
+    "name": "口臭が気になる",
+    "value": "explanations.json",
+    "title": "bad_breath",
+    "dentistReply": "口臭が気になるのじゃな。\n"
+  },
+  {
+    "id": 5,
+    "name": "タバコはやめたほうがいいと言われたけど本当？",
+    "value": "explanations.json",
+    "title": "tobacco",
+    "dentistReply": "タバコのぅ。\n"
+  }
+]

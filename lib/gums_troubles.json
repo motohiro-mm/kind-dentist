@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "歯茎が痛い",
+    "value": "explanations.json",
+    "title": "gums_pain",
+    "dentistReply": "歯茎が痛いのか。つらいのぅ。\n"
+  },
+  {
+    "id": 2,
+    "name": "歯茎から血が出る",
+    "value": "explanations.json",
+    "title": "gums_bleeding",
+    "dentistReply": "歯茎から血が出るのか。そうかそうか。\n"
+  },
+  {
+    "id": 3,
+    "name": "歯茎が下がってきている",
+    "value": "explanations.json",
+    "title": "receding_gums",
+    "dentistReply": "歯茎が下がってくると気になるのぅ。\n"
+  }
+]

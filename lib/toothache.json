@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "なにもしなくても痛い",
+    "value": "explanations.json",
+    "title": "toothache_now",
+    "dentistReply": "今も痛いのか。それはつらいのぅ。\n"
+  },
+  {
+    "id": 2,
+    "name": "前は何もしなくても痛かったけど今は落ち着いた",
+    "value": "explanations.json",
+    "title": "toothache_before",
+    "dentistReply": "今は落ち着いておるのじゃな。\n"
+  },
+  {
+    "id": 3,
+    "name": "冷たいものがしみるくらい",
+    "value": "explanations.json",
+    "title": "toothache_by_cold_food",
+    "dentistReply": "冷たいものがしみるとつらいのぅ。\n"
+  }
+]
